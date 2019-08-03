@@ -1,0 +1,187 @@
+{
+    "env": {
+        "browser": false,
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "script",
+        "ecmaFeatures": {
+            "jsx": false,
+            "impliedStrict": false
+        }
+    },
+    "extends": "strict/es6",
+    "rules": {
+        "complexity": "off",
+        "no-process-env": "off",
+        "no-process-exit": "off",
+        "array-bracket-newline": "off",
+//        "array-bracket-newline": [
+//            "error",
+//            {
+//                "multiline": true
+//            }
+//        ],
+        "array-bracket-spacing": [
+            "error",
+            "never"
+        ],
+        "array-element-newline": "off",
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "camelcase": [
+            "error"
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "class-methods-use-this": "off",
+        "arrow-body-style": [
+            0
+        ],
+        "dot-notation": [
+            "error",
+            {
+                "allowPattern": "^[a-z0-9]+(_[a-z0-9]+)+$"
+            }
+        ],
+        "filenames/match-regex": [
+            "error",
+            "^[a-z_]+$",
+            true
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "id-match": "off",
+        "id-length": "off",
+        "id-blacklist": [
+            "error",
+            // These name the type but have no other real context. Try naming with context
+            "array",
+            "func",
+            "object",
+            "string",
+            "num",
+            "number",
+            // Common placeholder variables, avoid these in real code
+            "foo",
+            "bar",
+            "baz",
+            "bang",
+            "biz",
+            "bong",
+            "tmp",
+            "temp",
+            "thing",
+            // These are common names for `this`. Instead use bind or arrow functions
+            "that",
+            "self",
+            "context"
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "init-declarations": [
+            "off"
+        ],
+        "max-lines": [
+            "warn",
+            1000
+        ],
+        "no-multi-spaces": [
+            "error",
+            {
+                "exceptions": {
+                    "Property": true,
+                    "VariableDeclarator": true,
+                    "ImportDeclaration": true
+                }
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2,
+                "maxEOF": 1
+            }
+        ],
+        "no-trailing-spaces": "error",
+        "eol-last": "error",
+        "no-console": "warn",
+        "curly": [
+            "error",
+            "all"
+        ],
+        "no-alert": "off",
+        "consistent-return": "error",
+        "no-param-reassign": "error",
+        "no-use-before-define": "off",
+        "no-irregular-whitespace": "error",
+        "no-inline-comments": "off",
+        "newline-after-var": "off",
+        "no-unused-expressions": "off",
+        "no-undefined": "off",
+        "no-magic-numbers": "off",
+        "no-underscore-dangle": "off",
+        "no-warning-comments": "off",
+        "object-curly-spacing": [
+            "error",
+            "never"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "prefer-destructuring": "off",
+        "radix": [
+            "error",
+            "as-needed"
+        ],
+        "semi": [
+            "error",
+            "always",
+            {
+                "omitLastInOneLineBlock": true
+            }
+        ],
+        "space-unary-ops": "off",
+        "func-style": "off",
+        "template-curly-spacing": [
+            "error",
+            "never"
+        ],
+        "one-var": [
+            2,
+            {
+                "var": "always",
+                "let": "always",
+                "const": "never"
+            }
+        ],
+        "valid-jsdoc": [
+            "error",
+            {
+                "requireParamDescription": false,
+                "requireReturnDescription": false
+            }
+        ],
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true
+                }
+            }
+        ]
+    }
+}

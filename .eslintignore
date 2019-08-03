@@ -1,0 +1,14 @@
+**/*.json
+coverage
+test
+doc/**
+docs/**
+node_modules/
+node_shrinkwrap/
+spec/
+tmp/
+debian/
+lib/nacl-stream.js
+admin/public
+foreground/public
+draft*.js
