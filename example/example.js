@@ -1,11 +1,11 @@
 'use strict';
 
 const _ = require('lodash');
-const GrpsServer = require('../lib/grpc_server');
+const GRPCServer = require('../lib/grpc_server');
 const matcherFactory = require('../lib/handlers/matching_handler_factory');
 
 (async () => {
-    const server = new GrpsServer({
+    const server = new GRPCServer({
         protoPaths: [
             'camversity/protobuf/discovery/discovery_service.proto'
         ],
@@ -44,7 +44,8 @@ const matcherFactory = require('../lib/handlers/matching_handler_factory');
         }
     );
     try {
-        await server.start();
+        const port = await server.start();
+        console.log(`gRPC server listening port ${port}`);
     } catch (err) {
         // eslint-disable-next-line no-console
         console.error(err);
