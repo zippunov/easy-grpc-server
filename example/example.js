@@ -1,46 +1,61 @@
 'use strict';
 
 const _ = require('lodash');
-const GRPCServer = require('../lib/grpc_server');
-const matcherFactory = require('../lib/handlers/matching_handler_factory');
+const easyGRPC = require('../index');
+const matcherFactory = easyGRPC.handlers.matchingHandler;
 
 (async () => {
-    const server = new GRPCServer({
+    const server = new easyGRPC.GRPCServer({
         protoPaths: [
-            'camversity/protobuf/discovery/discovery_service.proto'
+            'xcorp/protobuf/parking/parking_service.proto'
         ],
         includeDirs: [
-            '/Users/zipp/work/cmv-proto/src/main/proto'
+            '/Users/zipp/work/grpc-mock-server/example/proto'
         ],
         services: [
-            'camversity.protobuf.discovery.DiscoveryService'
+            'xcorp.protobuf.parking.ParkingService'
         ],
         port: 50051,
         secure: false,
         logger: console
     });
     server.addHandler(
-        'camversity.protobuf.discovery.DiscoveryService',
-        'GetAllModelTags',
+        'xcorp.protobuf.parking.ParkingService',
+        'CurrentBilling',
         matcherFactory(
             [
                 {
-                    match: {},
+                    match: {
+                        plate: 'ABC1234'
+                    },
                     reply: {
-                        tags: [
-                            {id: 'aaa', name: 'bbb', usageCount: 3},
-                            {id: 'ccc', name: 'ddd', usageCount: 8}
-                        ]
+                        plate: 'ABC1234',
+                        billing: {
+                            startTime: 1564981295210,
+                            plan: 'WORKDAY',
+                            billedTime: 360000,
+                            sum: 200,
+                            vat: 36
+                        }
                     }
                 }
             ]
         )
     );
     server.addHandler(
-        'camversity.protobuf.discovery.DiscoveryService',
-        'HomepageStreamingStatistics',
+        'xcorp.protobuf.parking.ParkingService',
+        'CurrentCapacity',
         (call, callback) => {
-            return callback(null, {liveCams: _.random(0, 100), viewers: _.random(0, 10000)});
+            const totalSlots = 100;
+            const reservedSlots = _.random(0, 20);
+            const takenSlots = _.random(0, totalSlots - reservedSlots);
+            const availableSlots = totalSlots - reservedSlots - takenSlots;
+            return callback(null, {
+                totalSlots,
+                reservedSlots,
+                takenSlots,
+                availableSlots
+            });
         }
     );
     try {

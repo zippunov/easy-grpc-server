@@ -21,7 +21,7 @@ $ npm install easy-grpc-server --save
 
   There is no need to define import directory for the Google Proto API files. They will be imported automatically. 
 
-  ### Init server
+  ### Quick start
   
   Basic example how to start gRPC server. No service method handlers were defined here.
   Every call will return `Unimplementd` gRPC error.
@@ -97,10 +97,50 @@ const {GRPCServer, GRPCError} = require('easy-grpc-server');
  Handler must be a function that accepts two parameters
  - `call` - gRPC call context
  - `callback` - classic JS callback `(error, result)` function. Error supplie to callback must be of `GRPCError` type
- ```javascript 1.8
+     ```javascript 1.8
+    
+    const {GRPCServer, GRPCError, status} = require('easy-grpc-server');
+    
+    const err = new GRPCError(status.INVALID_ARGUMENT, 'Car plate number is invalid', carPlate)
+    ```
+    For good explanation how to write handlers and use callbacks please check article [gRPC Basics - Node.js](https://grpc.io/docs/tutorials/basic/node/).
 
-const {GRPCServer, GRPCError, status} = require('easy-grpc-server');
-
-const err = new GRPCError(status.INVALID_ARGUMENT, 'Car plate number is invalid', carPlate)
+ ### Mocking
+ Intiailly this project was made for quick mocking of the third party gRPC services for the 
+ local development. Some mock related helper functions will be added to project over time.
+ At the moment there is one helper Handler Factory - `Matching Handler Factory`
+ 
+ #### Matching Handler
+ Idea behind Matching Handler that you define list of matching patterns for the request and 
+ typical response for corresponded pattern.
+ Matching pattern has structure `{match: object, reply: object}`.
+```javascript 1.8
+    const easyGRPC = require('easy-grpc-server');
+    const matchingHandlerFactory = easyGRPC.handlers.matchingHandler;
+    
+    server.addHandler(
+            'xcorp.protobuf.parking.ParkingService',
+            'CurrentBilling',
+            matcherFactory(
+                [
+                    {
+                        match: {
+                            plate: 'ABC1234'
+                        },
+                        reply: {
+                            plate: 'ABC1234',
+                            billing: {
+                                startTime: 1564981295210,
+                                plan: 'WORKDAY',
+                                billedTime: 360000,
+                                sum: 200,
+                                vat: 36
+                            }
+                        }
+                    }
+                ]
+            )
+        );
 ```
+
 

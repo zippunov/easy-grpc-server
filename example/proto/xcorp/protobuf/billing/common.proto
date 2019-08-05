@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.camversity.account.api";
+option java_outer_classname = "ParkingServiceProto";
+option objc_class_prefix = "ASP";
+
+package xcorp.protobuf.billing;
+
+enum BillingPlan {
+    WORKDAY = 0;
+    WEEKEND = 1;
+}
+
+message Invoice {
+    string id = 1;
+    uint64 issuedTime = 2;
+    uint64 startTime = 3;
+    uint64 endTime = 4;
+    xcorp.protobuf.billing.BillingPlan plan = 5;
+    uint64 billedTime = 6;
+    int32 sum = 7;
+    int32 vat = 8;
+}
+
+message CurrentBilling {
+    uint64 startTime = 3;
+    xcorp.protobuf.billing.BillingPlan plan = 5;
+    uint64 billedTime = 6;
+    int32 sum = 7;
+    int32 vat = 8;
+}

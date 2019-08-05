@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.camversity.account.api";
+option java_outer_classname = "ParkingServiceProto";
+option objc_class_prefix = "ASP";
+
+import "google/protobuf/empty.proto";
+import "xcorp/protobuf/billing/common.proto";
+
+package xcorp.protobuf.parking;
+
+service ParkingService {
+
+    rpc CurrentCapacity (google.protobuf.Empty) returns (CapacityResponse) {
+    }
+
+    rpc TakeSlot (PlateRequest) returns (TakeSlotResponse) {
+    }
+
+    rpc CurrentBilling (PlateRequest) returns (CurrentBillingResponse) {
+    }
+
+    rpc FreeSlot (PlateRequest) returns (FreeSlotResponse) {
+    }
+
+}
+
+message CapacityResponse {
+    int32 totalSlots = 1;
+    int32 takenSlots = 2;
+    int32 reservedSlots = 3;
+    int32 availableSlots = 4;
+}
+
+message TakeSlotRequest {
+    string plate  = 1;
+}
+
+message TakeSlotResponse {
+    bool code = 1;
+    bool success = 2;
+    string reason = 3;
+    int64 startTime = 4;
+}
+
+message PlateRequest {
+    string plate  = 1;
+}
+
+message CurrentBillingResponse {
+    string plate  = 1;
+    xcorp.protobuf.billing.CurrentBilling billing = 2;
+}
+
+message FreeSlotResponse {
+    string plate  = 1;
+    xcorp.protobuf.billing.Invoice invoice = 2;
+}
