@@ -1,6 +1,6 @@
 {
   "name": "easy-grpc-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": " gRPC server",
   "author": "https://github.com/zippunov",
   "keywords": [
@@ -11,6 +11,17 @@
     "server",
     "easy"
   ],
+  "homepage": "https://github.com/zippunov/easy-grpc-server#readme",
+  "bugs": {
+    "url": "https://github.com/zippunov/easy-grpc-server/issues"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/zippunov/easy-grpc-server.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
