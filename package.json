@@ -1,7 +1,7 @@
 {
   "name": "easy-grpc-server",
-  "version": "0.2.0",
-  "description": " gRPC server",
+  "version": "0.3.0",
+  "description": "Easy gRPC server. Quick way to implement or mock GRPC services.",
   "author": "https://github.com/zippunov",
   "keywords": [
     "grpc",
