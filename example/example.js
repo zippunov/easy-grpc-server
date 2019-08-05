@@ -1,8 +1,11 @@
 'use strict';
 
 const _ = require('lodash');
+const path = require('path');
 const easyGRPC = require('../index');
 const matcherFactory = easyGRPC.handlers.matchingHandler;
+const protoDir = path.join(__dirname, 'proto');
+
 
 (async () => {
     const server = new easyGRPC.GRPCServer({
@@ -10,7 +13,7 @@ const matcherFactory = easyGRPC.handlers.matchingHandler;
             'xcorp/protobuf/parking/parking_service.proto'
         ],
         includeDirs: [
-            '/Users/zipp/work/grpc-mock-server/example/proto'
+            protoDir
         ],
         services: [
             'xcorp.protobuf.parking.ParkingService'
