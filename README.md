@@ -1,7 +1,7 @@
 # easy-grpc-server 
 
-This is quick and easy way to bootstrap and/or mock gRPC service with NodeJs having only services
-definitions given as a set of protobug files.
+This is a quick and easy way to bootstrap and/or mock gRPC service with NodeJs having only services
+definitions, given as a set of protobuf files.
 
 ## Installation
 
@@ -14,17 +14,17 @@ $ npm install easy-grpc-server --save
 
   ### Proto files
   
-  Before start initialising server you have to define one or more import directories where roots of protobuf
-  files tree resides. 
-
-  Your protobuf sources may contain imports of the messages defined in the other protobuf files.
-
-  There is no need to define import directory for the Google Proto API files. They will be imported automatically. 
+  Before start initializing server you have to define one or more import directories where roots of protobuf
+   files tree resides. 
+  
+   Your protobuf sources may contain imports of the messages defined in the other protobuf files.
+  
+   There is no need to define an import directory for the Google Proto API files. They will be imported automatically. 
 
   ### Quick start
   
-  Basic example how to start gRPC server. No service method handlers were defined here.
-  Every call will return `Unimplementd` gRPC error.
+  The basic example of how to start gRPC server. No service method handlers were defined here.
+  Every call will return `Unimplemented` gRPC error.
   ```javascript 1.7
 const {GRPCServer, GRPCError} = require('easy-grpc-server');
 
@@ -78,23 +78,23 @@ const {GRPCServer, GRPCError} = require('easy-grpc-server');
  */
 ```
 - `includeDirs` is a list of directories where your proto files packages tree resides
-- `protoPaths` is a list of proto files which contains service defenitions you want to implement. You have to supply
+- `protoPaths` is a list of proto files which contains service definitions you want to implement. You have to supply
   relative path to one of the directories defined in the `includeDirs`
-- `services` is a list of service definitions you want server to implement. Full name including pakages must be specified.
+- `services` is a list of service definitions you want the server to implement. Full name including packages must be specified.
   For example `xcorp.protobuf.parking.ParkingService`
 - `port` is port number server will be bound to
 - `secure` is a boolean flag specifying if we want to run secured communication or opentext http/2.0 calls.
- Currently only insecure option is supported.
+  Currently, the only an insecure option is supported.
  
  #### `start(): Promise<number>`
  
- Async function that starts server and returns port server was bound to.
+ An async function that starts the server and returns port server was bound to.
  
  #### `addHandler(service: string, method: string, handler: (call: object, callback: Function) => void)`
  
- This method assings handled to the given service object (for example `xcorp.protobuf.parking.ParkingService`)
+ This method assigns handled to the given service object (for example `xcorp.protobuf.parking.ParkingService`)
  and chosen method (for example `addCar`).
- Handler must be a function that accepts two parameters
+ The handler must be a function that accepts two parameters
  - `call` - gRPC call context
  - `callback` - classic JS callback `(error, result)` function. Error supplie to callback must be of `GRPCError` type
      ```javascript 1.8
@@ -103,17 +103,18 @@ const {GRPCServer, GRPCError} = require('easy-grpc-server');
     
     const err = new GRPCError(status.INVALID_ARGUMENT, 'Car plate number is invalid', carPlate)
     ```
-    For good explanation how to write handlers and use callbacks please check article [gRPC Basics - Node.js](https://grpc.io/docs/tutorials/basic/node/).
+    For good explanation how to write handlers and use callbacks please check the article
+    [gRPC Basics - Node.js](https://grpc.io/docs/tutorials/basic/node/).
 
  ### Mocking
- Intiailly this project was made for quick mocking of the third party gRPC services for the 
- local development. Some mock related helper functions will be added to project over time.
- At the moment there is one helper Handler Factory - `Matching Handler Factory`
+ Initially, this project was made for quick mocking of the third party gRPC services for the 
+  local development. Some mock related helper functions will be added to the project over time.
+  At the moment there is one helper Handler Factory - `Matching Handler Factory`
  
  #### Matching Handler
- Idea behind Matching Handler that you define list of matching patterns for the request and 
- typical response for corresponded pattern.
- Matching pattern has structure `{match: object, reply: object}`.
+ The idea behind Matching Handler that you define a list of matching patterns for the request and 
+  the typical response for the corresponded pattern.
+  The matching pattern has a structure `{match: object, reply: object}`.
 ```javascript 1.8
     const easyGRPC = require('easy-grpc-server');
     const matchingHandlerFactory = easyGRPC.handlers.matchingHandler;
