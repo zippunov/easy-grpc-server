@@ -1,7 +1,8 @@
 syntax = "proto3";
 
+option go_package = "xcorp/protobuf/parking";
 option java_multiple_files = true;
-option java_package = "com.camversity.account.api";
+option java_package = "xcorp.account.api";
 option java_outer_classname = "ParkingServiceProto";
 option objc_class_prefix = "ASP";
 
