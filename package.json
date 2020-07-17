@@ -33,7 +33,7 @@
     "ajv": "6.10.2",
     "google-proto-files": "1.0.3",
     "grpc": "1.22.2",
-    "lodash": "4.17.15"
+    "lodash": "4.17.19"
   },
   "devDependencies": {
     "eslint": "6.1.0",
